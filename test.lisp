@@ -1,5 +1,6 @@
 (defpackage #:calispel-test
-  (:use #:common-lisp #:calispel #:jpl-queues))
+  (:use #:common-lisp #:calispel #:jpl-queues)
+  (:export #:test-channel #:test-concurrency))
 
 (in-package #:calispel-test)
 
@@ -305,7 +306,8 @@ that this function takes at least ~10 seconds to run."
 			 (channel-count 8)
 			 (make-channel-fn (lambda () (make-instance 'channel)))
 			 (message-count 2000000)
-			 (reader-count 4) (writer-count 4))
+			 (reader-count 4) (writer-count 4)
+       &allow-other-keys)
   "Tests concurrency by creating CHANNEL-COUNT CHANNELs and running
 TEST-CHANNEL against each, simultaneously.
 
